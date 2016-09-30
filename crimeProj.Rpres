@@ -1,0 +1,66 @@
+Denver Neighborhood Crime Analysis
+========================================================
+author: Monica Brisnehan
+date: September 30, 2016
+autosize: true
+css: www/superhero.css
+
+Denver Crime Trends
+========================================================
+
+Does it seem like crime is up everywhere you go? Is crime really on the increase or do we just hear more about it because of new methods of communication? 
+
+The Denver Crime Data Shiny app uses publicly available data to answer these questions.
+ 
+## Data Source
+
+[Denver Open Data Catalog] (https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-crime)
+<img src="denverlogo.jpg" width="240" style="float:right">
+
+Why Use the Denver Crime App
+========================================================
+
+- Social media such as NextDoor and Facebook have enhanced the sharing of information globally. 
+- However, it may also, unwittingly, be amplifying things that were always present
+- This app looks into specific neighborhoods within the city of Denver for crime trends over the past five years (current year is excluded, due to lack of full-year comparability)
+- Neighborhoods can be analysed for all crimes or specific crimes
+
+Things to Know About The Data
+========================================================
+
+The data loaded natively by the Shiny app has been tidied for this analysis. A number of considerations were taken into account:
+
+1. The City of Denver, in 2013, began incorporating crime data using the Uniform Summons & Complaint system (US&C). Not previously captured in the crime data, the data provided by this system was captured in "All other crimes" category and this analysis eliminates that category in all years.
+2. This analysis and app uses data downloaded as of March 17, 2016. (more recent downloads had corrupted data.)
+3. The R file denverData.R provides code for cleaning and preparing the data set, which is saved as crimeData.Rda. This dataset is used in the Shiny app. 
+
+
+Denver As A Whole
+========================================================
+
+```{r, denverPlot, fig.width=8,fig.height=4.5,dpi=300,out.width="1920px",height="1080px", echo=FALSE, dev.args = list(bg = 'transparent')}
+
+library(dplyr)
+library(ggplot2)
+crimeData <- readRDS(file="data/crimeData.Rda")
+plotData <- crimeData %>% group_by(year, offense) %>% tally(.)
+
+g <- ggplot(plotData, aes(x = year, y = nn)) +
+            geom_bar(aes(fill = offense), stat="identity") +
+            labs(title = paste('Total Occurences in All Denver Neighborhoods'),
+                x = "", y = "Occurrences") +
+            theme(text = element_text(colour="white"),
+                  axis.text = element_text(size = 14, colour="white"),
+                  plot.title = element_text(size = 20),
+                  legend.position="bottom",
+                  legend.key= element_blank(),
+                  legend.title = element_blank(),
+                  legend.text = element_text(size=12),
+                  legend.background=element_blank(),
+                  panel.background=element_blank(),
+                  plot.background=element_blank(),
+                  panel.grid=element_blank()
+                  )
+g
+
+```
