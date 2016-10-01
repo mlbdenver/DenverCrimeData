@@ -12,4 +12,13 @@ The data in this app are sourced from the Denver Open Data Catalog (https://www.
 
 ### Shiny App
 
-### Slidify Slides
+The Shiny app can be found [here] (https://mlbdenver.shinyapps.io/denvercrimedata/)
+
+To use the app:
+
+1. Select the neighborhood for which you'd like to see crime data.
+2. Either leave "All crimes" selected to see all reportable crimes, or choose "Select Individual Categories" to seee a list of crimes from which to choose. You can select any combination of crime categories.
+
+### Presentation Slides
+
+A short slide deck about the app can be found [here] (http://rpubs.com/mlbdenver/denvercrimedata)
