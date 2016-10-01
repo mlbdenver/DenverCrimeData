@@ -22,3 +22,7 @@ To use the app:
 ### Presentation Slides
 
 A short slide deck about the app can be found [here] (http://rpubs.com/mlbdenver/denvercrimedata)
+
+### Get and clean a fresh data set
+
+Under normal circumstances, the R file denverData.R can be used to download a new, updated data set. However, due to the circumstances detailed in the Data Source section, item #2 above, the code to lownload new data has been commented out and instead uses raw data downloaded on March 17, 2016. If/when the City of Denver corrects their data file, this file will be edited to allow the upload of a new data set.
